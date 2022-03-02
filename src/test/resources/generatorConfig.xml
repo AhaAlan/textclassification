@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!--suppress MybatisGenerateCustomPluginInspection -->
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+<!--        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+<!--            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+<!--            <property name="caseSensitive" value="true"/>-->
+<!--        </plugin>-->
+
+        <!--需要修改jdbc的账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/TextClassification?characterEncoding=utf8"
+                        userId="root"
+                        password="f2511lyt">
+        </jdbcConnection>
+
+        <!--MyBatis 生成器只需要生成 Model-->
+        <javaModelGenerator targetPackage="com.lacoders.textclassification.dao.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- map.xml -->
+        <sqlMapGenerator targetPackage="dao/mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--dao配置-->
+        <!--dao配置文件生成，生成名称为 xxxxMapper，需要手动改名-->
+        <javaClientGenerator targetPackage="com.lacoders.textclassification.dao.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+
+        <table tableName="comment"
+               domainObjectName="CommentPO">
+            <generatedKey column="comment_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="news"
+               domainObjectName="NewsPO">
+            <generatedKey column="news_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="user"
+               domainObjectName="UserPO">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="user_token"
+               domainObjectName="UserTokenPO">
+        </table>
+
+
+    </context>
+</generatorConfiguration>
+
